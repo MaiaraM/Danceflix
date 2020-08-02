@@ -6,7 +6,7 @@ import {dadosIniciais} from '../../helper/Moks';
 import TemplateDefault from '../../components/TemplateDefault';
 
 
-const Home = () =>{
+const HomePage = () =>{
 
     return <TemplateDefault>
          <BannerMain
@@ -43,4 +43,4 @@ const Home = () =>{
 
 }
 
-export default Home;
+export default HomePage;
