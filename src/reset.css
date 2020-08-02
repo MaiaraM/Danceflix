@@ -25,17 +25,16 @@
     color: inherit;
   } 
 
-  body {
+  body{
     --bodyPaddingTop: 94px;
     padding-top: var(--bodyPaddingTop);
   }
-  @media (max-width: 800px) {
-    .Menu {
-      height: 40px;
-      justify-content: center;
-    }
-    body {
-      --bodyPaddingTop: 40px;
-      padding-top: var(--bodyPaddingTop);
-    }
+
+  #root{
+    min-height: calc(100vh - var(--bodyPaddingTop));
+    flex-direction: column;
+    display: flex;
   }
+
+
+ 

@@ -1,23 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
 
-import Menu from './components/Menu';
-import BannerMain from './components/BannerMain';
-import Footer from './components/Footer';
-import Carousel from './components/Carousel';
-import {dadosIniciais} from './Helper/Moks';
+import BannerMain from '../../components/BannerMain';
+import Carousel from '../../components/Carousel';
+import {dadosIniciais} from '../../helper/Moks';
+import TemplateDefault from '../../components/TemplateDefault';
 
 
-const AppWrapper = styled.div`
-  background: var(--grayDark);
-`;
+const HomePage = () =>{
 
-function App() {
-  return (
-    <AppWrapper>
-      <Menu/>
-
-      <BannerMain
+    return <TemplateDefault>
+         <BannerMain
         videoTitle={dadosIniciais.categorias[0].videos[0].titulo}
         url={dadosIniciais.categorias[0].videos[0].url}
         videoDescription={"O que é Front-end? Trabalhando na área os termos HTML, CSS e JavaScript fazem parte da rotina das desenvolvedoras e desenvolvedores. Mas o que eles fazem, afinal? Descubra com a Vanessa!"}
@@ -47,12 +39,8 @@ function App() {
       <Carousel
         category={dadosIniciais.categorias[5]}
       />      
+    </TemplateDefault>
 
-      <Footer />
-
-    
-    </AppWrapper>
-  );
 }
 
-export default App;
+export default HomePage;

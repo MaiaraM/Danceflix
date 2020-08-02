@@ -26,6 +26,11 @@ export const MenuWrapper = styled.nav`
     
     border-bottom: 2px solid var(--primary);
     background-color: var(--black);
+
+    @media (max-width: 800px) {
+        height: 40px;
+        justify-content: center;
+    }
 `;
 
 export const ButtonMenu = styled(Button)`
