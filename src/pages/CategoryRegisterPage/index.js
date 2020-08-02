@@ -10,4 +10,4 @@ const CategoryRegisterPage = () =>{
 
 }
 
-export default CadastroCategoria;
+export default CategoryRegisterPage;

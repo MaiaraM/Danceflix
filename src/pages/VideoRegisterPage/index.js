@@ -9,4 +9,4 @@ const VideoRegisterPage = () =>{
 
 }
 
-export default CadastroVideo;
+export default VideoRegisterPage;
