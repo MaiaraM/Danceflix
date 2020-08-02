@@ -4,11 +4,11 @@ import TemplateDefault from '../../components/TemplateDefault';
 
 
 
-const CadastroVideo = () =>{
+const CadastroCategoria = () =>{
     return <TemplateDefault>
        <h1>Cadastro de Vídeo</h1>
     </TemplateDefault>
 
 }
 
-export default CadastroVideo;
+export default CadastroCategoria;
