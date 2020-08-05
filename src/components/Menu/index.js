@@ -10,7 +10,7 @@ const Menu = () => (
       <LogoImage src={Logo} alt="Danceflix" />
     </Link>
 
-    <ButtonMenu as={Link} to="/cadastro/video">
+    <ButtonMenu as={Link} to="/cadastro/categoria">
       Novo Vídeo
     </ButtonMenu>
   </MenuWrapper>
