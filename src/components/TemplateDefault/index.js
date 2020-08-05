@@ -10,15 +10,14 @@ const Main = styled.div`
   flex: 1;
 `;
 
-const TemplateDefault = ({ children }) => {
-    return <>
-        <Menu />
-        <Main>
-            {children}
-        </Main>
-        <Footer />
-    </>
-
-}
+const TemplateDefault = ({ children }) => (
+  <>
+    <Menu />
+    <Main>
+      {children}
+    </Main>
+    <Footer />
+  </>
+);
 
 export default TemplateDefault;
