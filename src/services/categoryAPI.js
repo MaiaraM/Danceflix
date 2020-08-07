@@ -1,0 +1,30 @@
+import { URL_API } from '../config';
+
+const URL_CATEGORIES = `${URL_API}/categorias`;
+
+function getAll() {
+  return fetch(URL_CATEGORIES)
+    .then(async (respostaDoServer) => {
+      if (respostaDoServer.ok) {
+        const resposta = await respostaDoServer.json();
+        return resposta;
+      }
+      throw new Error('Não foi possível pegar os dados');
+    });
+}
+
+function getAllWithVideos() {
+  return fetch(`${URL_CATEGORIES}?_embed=videos`)
+    .then(async (respostaDoServer) => {
+      if (respostaDoServer.ok) {
+        const resposta = await respostaDoServer.json();
+        return resposta;
+      }
+      throw new Error('Não foi possível pegar os dados');
+    });
+}
+
+export default {
+  getAll,
+  getAllWithVideos,
+};

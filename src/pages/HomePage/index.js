@@ -1,43 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import BannerMain from '../../components/BannerMain';
 import Carousel from '../../components/Carousel';
-import { dadosIniciais } from '../../helper/Moks';
 import TemplateDefault from '../../components/TemplateDefault';
+import categoryAPI from '../../services/categoryAPI';
 
-const HomePage = () => (
-  <TemplateDefault>
-    <BannerMain
-      videoTitle={dadosIniciais.categorias[0].videos[0].titulo}
-      url={dadosIniciais.categorias[0].videos[0].url}
-      videoDescription="O que é Front-end? Trabalhando na área os termos HTML, CSS e JavaScript fazem parte da rotina das desenvolvedoras e desenvolvedores. Mas o que eles fazem, afinal? Descubra com a Vanessa!"
-    />
+const HomePage = () => {
+  const [initialDate, setInitialDate] = useState([]);
 
-    <Carousel
-      ignoreFirstVideo
-      category={dadosIniciais.categorias[0]}
-    />
+  useEffect(() => {
+    categoryAPI.getAllWithVideos()
+      .then((categoriasComVideos) => {
+        console.log(categoriasComVideos[0].videos[0]);
+        setInitialDate(categoriasComVideos);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
-    <Carousel
-      category={dadosIniciais.categorias[1]}
-    />
+  return (
+    <TemplateDefault paddingAll={0}>
 
-    <Carousel
-      category={dadosIniciais.categorias[2]}
-    />
+      {initialDate.length > 0
+      && initialDate.map((categoria, indice) => {
+        if (indice === 0) {
+          return (
+            <div key={categoria.id}>
+              <BannerMain
+                videoTitle={initialDate[0].videos[0].titulo}
+                url={initialDate[0].videos[0].url}
+                videoDescription={initialDate[0].videos[0].description}
+              />
+              <Carousel
+                ignoreFirstVideo
+                category={initialDate[0]}
+              />
+            </div>
+          );
+        }
 
-    <Carousel
-      category={dadosIniciais.categorias[3]}
-    />
-
-    <Carousel
-      category={dadosIniciais.categorias[4]}
-    />
-
-    <Carousel
-      category={dadosIniciais.categorias[5]}
-    />
-  </TemplateDefault>
-);
+        return (
+          <Carousel
+            key={categoria.id}
+            category={categoria}
+          />
+        );
+      })}
+    </TemplateDefault>
+  );
+};
 
 export default HomePage;
