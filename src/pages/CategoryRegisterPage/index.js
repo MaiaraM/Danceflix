@@ -18,7 +18,7 @@ function CategoryRegisterPage() {
   // ============
 
   useEffect(() => {
-    categoryAPI.getAll() 
+    categoryAPI.getAll()
       .then((categories) => {
         setCategorias(categories);
       }).catch((error) => console.error(error));

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 
 import BannerMain from '../../components/BannerMain';
@@ -11,11 +12,10 @@ const HomePage = () => {
   useEffect(() => {
     categoryAPI.getAllWithVideos()
       .then((categoriasComVideos) => {
-        console.log(categoriasComVideos[0].videos[0]);
         setInitialDate(categoriasComVideos);
       })
       .catch((err) => {
-        console.log(err.message);
+        console.error(err.message);
       });
   }, []);
 

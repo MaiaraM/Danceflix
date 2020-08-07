@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { Input, FormFieldWrapper, Label } from './styled';
 
 function FormField({
-  name, label, type, value, onChange, tag,
+  name, label, type, value, onChange, tag, suggestions,
 }) {
   const fieldId = `input_${name}`;
+  const hasSuggestions = Boolean(suggestions.length);
 
   return (
     <FormFieldWrapper>
@@ -17,10 +18,25 @@ function FormField({
           value={value}
           name={name}
           onChange={onChange}
+          autoComplete={hasSuggestions ? 'off' : 'on'}
+          list={hasSuggestions ? `suggestionFor_${fieldId}` : undefined}
         />
         <Label.Text>
           {label}
         </Label.Text>
+        {
+          hasSuggestions && (
+            <datalist id={`suggestionFor_${fieldId}`}>
+              {
+                suggestions.map((suggestion) => (
+                  <option value={suggestion} key={`suggestionFor_${fieldId}_option${suggestion}`}>
+                    {suggestion}
+                  </option>
+                ))
+              }
+            </datalist>
+          )
+        }
       </Label>
     </FormFieldWrapper>
 
@@ -31,6 +47,7 @@ FormField.defaultProps = {
   type: 'text',
   value: '',
   tag: 'input',
+  suggestions: [],
 };
 
 FormField.propTypes = {
@@ -39,6 +56,7 @@ FormField.propTypes = {
   type: PropTypes.string,
   value: PropTypes.string,
   tag: PropTypes.string,
+  suggestions: PropTypes.array,
   onChange: PropTypes.func.isRequired,
 };
 
