@@ -1,27 +1,64 @@
-import React from 'react';
-import { Form } from '@unform/web';
+import React, { useState, useEffect } from 'react';
 
-import Input from '../../components/Input';
 import TemplateDefault from '../../components/TemplateDefault';
+import FormField from '../../components/FormField';
+import Button from '../../components/Button';
 
-function VideoRegisterPage() {
-  function handleSubmit(data) {
-    console.log(data);
-    // { email: 'test@example.com', password: '123456' }
+function CategoryRegisterPage() {
+  const valoresIniciais = {
+    name: '',
+    description: '',
+    color: '',
+  };
+  const [categorias, setCategorias] = useState([]);
+  const [values, setValues] = useState(valoresIniciais);
+
+  function setValue(chave, valor) {
+    // chave: nome, descricao, bla, bli
+    setValues({
+      ...values,
+      [chave]: valor, // nome: 'valor'
+    });
   }
+
+  function handleChange(infosDoEvento) {
+    setValue(
+      infosDoEvento.target.getAttribute('name'),
+      infosDoEvento.target.value,
+    );
+  }
+
+  // ============
+
+  useEffect(() => {
+    if (window.location.href.includes('localhost')) {
+      const URL = 'http://localhost:8080/categorias';
+      fetch(URL)
+        .then(async (respostaDoServer) => {
+          if (respostaDoServer.ok) {
+            const resposta = await respostaDoServer.json();
+            setCategorias(resposta);
+            return;
+          }
+          throw new Error('Não foi possível pegar os dados');
+        });
+    }
+  }, []);
 
   return (
     <TemplateDefault>
       <h1>Cadastro de Categoria</h1>
 
-      <Form onSubmit={handleSubmit}>
-        <Input name="name" type="text" label="Nome da Categoria" />
-        <Input name="description" type="text" label="Descrição" />
-        <Input name="color" type="color" label="Cor" />
-        <button type="submit">Sign in</button>
-      </Form>
+      <form>
+        <FormField name="name" type="text" label="Nome da Categoria" value={values.name} onChange={handleChange} />
+        <FormField name="description" type="text" label="Descrição" tag="textarea" value={values.description} onChange={handleChange} />
+        <FormField name="color" type="color" label="Cor" value={values.color} onChange={handleChange} />
+        <Button>
+          Cadastrar
+        </Button>
+      </form>
     </TemplateDefault>
   );
 }
 
-export default VideoRegisterPage;
+export default CategoryRegisterPage;
